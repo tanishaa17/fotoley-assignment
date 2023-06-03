@@ -42,11 +42,15 @@ export const Home = () => {
     // HANDLING PREV AND NEXT BUTTON
 
     const handlePrevious = () => {
-
+        setCurrIndex(prevIndex =>
+            prevIndex === 0 ? img.length - 1 : prevIndex - 1
+        );
     };
 
     const handleNext = () => {
-
+        setCurrIndex(prevIndex =>
+            prevIndex === img.length - 1 ? 0 : prevIndex + 1
+        );
     };
 
     return (
@@ -79,7 +83,11 @@ export const Home = () => {
             <IconButton aria-label="play/pause">
                 <NavigateBeforeIcon onClick={handlePrevious} sx={{ height: 38, width: 38 }} />
             </IconButton>
-
+            {img.map((img, ind) => {
+                return (
+                    <img key={ind} src={img.image} height="100px" style={{ cursor: "pointer" }} />
+                )
+            })}
             <IconButton aria-label="play/pause">
                 <NavigateNextIcon onClick={handleNext} sx={{ height: 38, width: 38 }} />
             </IconButton>
