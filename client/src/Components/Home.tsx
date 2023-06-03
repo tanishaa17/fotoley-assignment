@@ -76,13 +76,30 @@ export const Home = () => {
 
     return (
         <Card sx={{ boxShadow: 'none', border: "none", p: "2%", }} >
-            <Card sx={{ boxShadow: 'none', border: "none", display: 'flex', gap: "20px" }} >
+            <Card sx={{
+                boxShadow: 'none', border: "none", display: 'flex', gap: "20px", '@media (max-width: 900px)': {
+                    flexDirection: 'row',
+                    display: "block",
+                    p: 0
+                },
+            }} >
                 <CardMedia
                     component="img"
-                    sx={{ height: '400px', width: "55%", borderRadius: "20px" }}
+                    sx={{
+                        height: '400px', width: "55%", borderRadius: "20px", '@media (max-width: 900px)': {
+                            display: "block",
+                            width: "100%",
+                            height: "100%"
+                        }
+                    }}
                     image={img[currrIndex].image}
                 />
-                <Box sx={{ display: 'flex', flexDirection: 'column', width: "42%" }}>
+                <Box sx={{
+                    display: 'flex', flexDirection: 'column', width: "42%", '@media (max-width: 900px)': {
+                        display: "block",
+                        width: "100%"
+                    }
+                }}>
                     <CardContent sx={{ flex: '1 0 auto' }}>
                         <Typography component="div" variant="h4">
                             Detailed Info
@@ -94,8 +111,14 @@ export const Home = () => {
                 </Box>
             </Card>
 
-            <Card sx={{ boxShadow: 'none', border: "none", display: 'flex', paddingTop: 3, paddingLeft: 0 }} >
-                <Card sx={{ boxShadow: 'none', borderRadius: 0, display: 'flex', justifyContent: "center", alignItems: "center", }} >
+            <Card sx={{
+                boxShadow: 'none', border: "none", display: 'flex', paddingTop: 3, paddingLeft: 0, '@media (max-width: 900px)': {
+                    display: "block"
+                }
+            }} >
+                <Card sx={{
+                    boxShadow: 'none', borderRadius: 0, display: 'flex', justifyContent: "center", alignItems: "center"
+                }} >
                     <IconButton aria-label="play/pause" >
                         <NavigateBeforeIcon onClick={handlePrevious} sx={{ height: 40, width: 40 }} />
                     </IconButton>
@@ -106,14 +129,22 @@ export const Home = () => {
                             }} />
                         )
                     })}
-                    <IconButton aria-label="play/pause">
+                    <IconButton aria-label="next">
                         <NavigateNextIcon onClick={handleNext} sx={{ height: 40, width: 40 }} />
                     </IconButton>
                 </Card>
-                <Box sx={{ display: 'flex', alignItems: 'center', }}>
+                <Box sx={{
+                    display: 'flex', alignItems: 'center', justifyContent: "center", width: "42%", '@media (max-width: 900px)': {
+                        width: "100%"
+                    }
+                }}>
 
-                    <IconButton onClick={handlePlayPauseButton} aria-label="play/pause">
-                        {isPlaying ? <PauseIcon sx={{ height: 40, width: 40 }} /> : <PlayArrowIcon sx={{ height: 40, width: 40 }} />}
+                    <IconButton onClick={handlePlayPauseButton} aria-label="play/pause" sx={{ border: "5px solid", textAlign: "center" }}>
+                        {isPlaying ? <PauseIcon sx={{
+                            height: 40, width: 40
+                        }} /> : <PlayArrowIcon sx={{
+                            height: 40, width: 40
+                        }} />}
                     </IconButton>
                 </Box>
             </Card>
