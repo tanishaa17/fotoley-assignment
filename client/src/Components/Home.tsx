@@ -20,6 +20,7 @@ export const Home = () => {
     const [currrIndex, setCurrIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false)
     // const [isPaused, setIsPaused] = useState(false)
+    const [activeImg, setActiveImg] = useState<ImageDetails[]>([]);
     const detail = "Details"
     const img: ImageDetails[] = [
         { image: '/assets/images/img13.jpg', details: detail },
@@ -66,6 +67,14 @@ export const Home = () => {
         }
     }, [isPlaying, img])
 
+    const visibleImages = [
+        img[(currrIndex + img.length - 2) % img.length],
+        img[(currrIndex + img.length - 1) % img.length],
+        img[currrIndex],
+        img[(currrIndex + 1) % img.length],
+        img[(currrIndex + 2) % img.length],
+    ];
+
     return (
         <Card sx={{ boxShadow: 'none', borderRadius: 0 }} >
             <Card sx={{ boxShadow: 'none', borderRadius: 0, display: 'flex' }} >
@@ -90,28 +99,27 @@ export const Home = () => {
             <Card sx={{ boxShadow: 'none', borderRadius: 0, display: 'flex' }} >
                 <Card sx={{ boxShadow: 'none', borderRadius: 0 }} >
                     <IconButton aria-label="play/pause">
-                        <NavigateBeforeIcon onClick={handlePrevious} sx={{ height: 38, width: 38 }} />
+                        <NavigateBeforeIcon onClick={handlePrevious} sx={{ height: 40, width: 40 }} />
                     </IconButton>
-                    {img.map((img, ind) => {
+                    {visibleImages.map((img, ind) => {
                         return (
-                            <img key={ind} src={img.image} height="100px" style={{
-                                cursor: "pointer", filter: currrIndex === ind ? 'none' : 'grayscale(100%)',
+                            <img onClick={() => setCurrIndex((currrIndex + ind - 2) % 10)} key={ind} src={img.image} height="100px" style={{
+                                cursor: "pointer", filter: ind === 2 ? 'none' : 'grayscale(100%)',
                             }} />
                         )
                     })}
                     <IconButton aria-label="play/pause">
-                        <NavigateNextIcon onClick={handleNext} sx={{ height: 38, width: 38 }} />
+                        <NavigateNextIcon onClick={handleNext} sx={{ height: 40, width: 40 }} />
                     </IconButton>
                 </Card>
                 <Box sx={{ display: 'flex', alignItems: 'center', }}>
 
                     <IconButton onClick={handlePlayPauseButton} aria-label="play/pause">
-                        {isPlaying ? <PauseIcon sx={{ height: 38, width: 38 }} /> : <PlayArrowIcon sx={{ height: 38, width: 38 }} />}
+                        {isPlaying ? <PauseIcon sx={{ height: 40, width: 40 }} /> : <PlayArrowIcon sx={{ height: 40, width: 40 }} />}
                     </IconButton>
                 </Box>
             </Card>
         </Card>
     );
 }
-
 
