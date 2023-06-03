@@ -34,6 +34,21 @@ export const Home = () => {
         { image: '/assets/images/images (3).jpg', details: detail },
         { image: '/assets/images/images (4).jpg', details: detail },
     ]
+    // HANDLING PLAY AND PAUSE BUTTON
+    const handlePlayPauseButton = () => {
+        setIsPlaying(prevState => !prevState);
+    };
+
+    // HANDLING PREV AND NEXT BUTTON
+
+    const handlePrevious = () => {
+
+    };
+
+    const handleNext = () => {
+
+    };
+
     return (
         <div>
             <Card sx={{ display: 'flex' }}>
@@ -54,22 +69,19 @@ export const Home = () => {
                     </CardContent>
                     <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
 
-                        <IconButton aria-label="play/pause">
-                            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+                        <IconButton onClick={handlePlayPauseButton} aria-label="play/pause">
+                            {isPlaying ? <PauseIcon sx={{ height: 38, width: 38 }} /> : <PlayArrowIcon sx={{ height: 38, width: 38 }} />}
                         </IconButton>
-                        <IconButton aria-label="play/pause">
-                            <PauseIcon sx={{ height: 38, width: 38 }} />
-                        </IconButton>
-
                     </Box>
                 </Box>
 
             </Card>
             <IconButton aria-label="play/pause">
-                <NavigateBeforeIcon sx={{ height: 38, width: 38, }} />
+                <NavigateBeforeIcon onClick={handlePrevious} sx={{ height: 38, width: 38 }} />
             </IconButton>
+
             <IconButton aria-label="play/pause">
-                <NavigateNextIcon sx={{ height: 38, width: 38, }} />
+                <NavigateNextIcon onClick={handleNext} sx={{ height: 38, width: 38 }} />
             </IconButton>
 
         </div>
