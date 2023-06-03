@@ -8,7 +8,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
@@ -53,13 +53,27 @@ export const Home = () => {
         );
     };
 
+    useEffect(() => {
+        let id: NodeJS.Timer;
+        if (isPlaying) {
+            id = setInterval(() => {
+                setCurrIndex((prevInd) => {
+                    return prevInd == img.length - 1 ? 0 : prevInd + 1;
+                })
+            }, 1000)
+        }
+        return () => {
+            clearInterval(id)
+        }
+    }, [isPlaying, img])
+
     return (
         <div>
             <Card sx={{ display: 'flex' }}>
                 <CardMedia
                     component="img"
                     sx={{ width: 800 }}
-                    image="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+                    image={img[currrIndex].image}
                     alt="Live from space album cover"
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
